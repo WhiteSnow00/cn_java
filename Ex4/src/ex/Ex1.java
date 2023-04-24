@@ -7,7 +7,6 @@ package ex;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
 
 
 
@@ -57,20 +56,13 @@ private void displayStudents(String search) {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jTextField1.addActionListener(new java.awt.event.ActionListener() {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jTextField1ActionPerformed(evt);
-        }
-    });
+    jTextField1.addActionListener(this::jTextField1ActionPerformed);
 
     jLabel1.setText("Mã SV");
 
     jButton1.setText("Xóa");
-    jButton1.addActionListener(new java.awt.event.ActionListener() {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    int selectedRow = jTable1.getSelectedRow();
+    jButton1.addActionListener((java.awt.event.ActionEvent evt) -> {
+        int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
             int maSV = (int) jTable1.getValueAt(selectedRow, 0);
             DatabaseUtils.deletestudent(maSV);
@@ -78,24 +70,17 @@ private void displayStudents(String search) {
         } else {
             JOptionPane.showMessageDialog(null, "Vui lòng chọn sinh viên muốn xóa.", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        }
     });
 
     jButton2.setText("Hiển thị");
-    jButton2.addActionListener(new java.awt.event.ActionListener() {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            String search = jTextField1.getText();
-            displayStudents(search);
-        }
+    jButton2.addActionListener((java.awt.event.ActionEvent evt) -> {
+        String search = jTextField1.getText();
+        displayStudents(search);
     });
 
     jButton3.setText("Thoát");
-    jButton3.addActionListener(new java.awt.event.ActionListener() {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            System.exit(0);
-        }
+    jButton3.addActionListener((java.awt.event.ActionEvent evt) -> {
+        System.exit(0);
     });
 
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -197,11 +182,8 @@ private void displayStudents(String search) {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Ex1().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Ex1().setVisible(true);
         });
     }
 
